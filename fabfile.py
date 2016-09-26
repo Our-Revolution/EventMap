@@ -14,27 +14,6 @@ from fabric.api import *
 from fabric.operations import local
 from string import Template
 
-
-def update_office_locations():
-
-    print "started downloading Campaign Offices"
-
-    local('cd d; curl "https://docs.google.com/spreadsheets/d/1hJadb6JyDekHf5Vzx-77h7sdJRCOB01XUPvEpKIckDs/pub?gid=0&single=true&output=csv" > campaign-offices.csv')
-
-    local('cd d; curl "https://docs.google.com/spreadsheets/d/1rRexu31MYdff4PLwgPW1A8TMXkFBLmBxU444khLhWaQ/pub?gid=0&single=true&output=csv" > go-the-distance.csv')
-
-    print "Finished Downloading campaign offices"
-
-
-def update_go_the_distance_offices():
-
-    print "started downloading Go the Distance Offices"
-
-    local('cd d; curl "https://sheetsu.com/apis/b835e696" > go-the-distance-offices.csv')
-
-    print "Finished Downloading Go the Distance offices"
-
-
 def update_event_data():
 
     eastern = pytz.timezone('US/Eastern')
@@ -44,9 +23,9 @@ def update_event_data():
     if THREE_WEEK_LIMIT:
         start_date = int((eastern.localize(datetime.datetime.now().replace(hour=0, minute=0, second=0, microsecond=0), is_dst=None) - datetime.datetime(1970, 1, 1, tzinfo=pytz.utc)).total_seconds())
         end_date = int((eastern.localize(datetime.datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) + datetime.timedelta(days=21), is_dst=None) - datetime.datetime(1970, 1, 1, tzinfo=pytz.utc)).total_seconds() - 1)
-        events_url = 'http://go.berniesanders.com/page/event/search_results?country=US&date_start=%(start_date)s&date_end=%(end_date)s&limit=10000&format=json' % {'start_date': start_date, 'end_date': end_date}
+        events_url = 'http://go.ourrevolution.com/page/event/search_results?country=US&date_start=%(start_date)s&date_end=%(end_date)s&limit=10000&format=json' % {'start_date': start_date, 'end_date': end_date}
 
-    events_url = 'http://go.berniesanders.com/page/event/search_results?country=US&limit=5000&format=json'
+    events_url = 'http://go.ourrevolution.com/page/event/search_results?country=US&limit=5000&format=json'
 
     print "Fetching events from %s" % events_url
 
@@ -59,7 +38,7 @@ def update_event_data():
     global rsvp_count
     rsvp_count = 0
 
-    events_url_PR = 'http://go.berniesanders.com/page/event/search_results?country=PR&limit=100&format=json'
+    events_url_PR = 'http://go.ourrevolution.com/page/event/search_results?country=PR&limit=100&format=json'
     print "Fetching events from %s" % events_url_PR
     resp_PR = requests.get(events_url_PR)
     data_PR = json.loads(resp_PR.text)
@@ -86,13 +65,7 @@ def update_event_data():
         rsvp_count += row['attendee_count'] if 'attendee_count' in row else 0
         return row
 
-    def remove_the_mormons(row):
-        if 'id_obfuscated' in row:
-            if row['id_obfuscated'] == '4vxqd':
-                return False
-        return True
-
-    data_out = {'results': map(clean_result, filter(remove_the_mormons, data['results'] + data_PR['results']))}
+    data_out = {'results': map(clean_result, data['results'] + data_PR['results'])}
 
 
     data['settings']['rsvp'] = rsvp_count
@@ -124,15 +97,10 @@ def update_event_data():
 
 def deploy_event_data():
     update_event_data()
-    update_office_locations()
-    update_go_the_distance_offices()
 
-    local("aws s3 cp js/event-data.gz s3://map.berniesanders.com/js/event-data.gz --metadata-directive REPLACE --content-encoding \"gzip\" --content-type \"text/javascript\" --region \"us-west-2\"")
-    local("aws s3 cp d/events.json s3://map.berniesanders.com/d/events.json --metadata-directive REPLACE --content-type \"text/plain\" --region \"us-west-2\"")
-    local("aws s3 cp d/campaign-offices.csv s3://map.berniesanders.com/d/campaign-offices.csv --metadata-directive REPLACE --content-type \"text/plain\" --region \"us-west-2\"")
-    local("aws s3 cp d/go-the-distance.csv s3://map.berniesanders.com/d/go-the-distance.csv --metadata-directive REPLACE --content-type \"text/plain\" --region \"us-west-2\" --acl \"public-read\"")
-    local("aws s3 cp d/go-the-distance-offices.csv s3://map.berniesanders.com/d/go-the-distance-offices.csv --metadata-directive REPLACE --content-type \"text/plain\" --region \"us-west-2\" --acl \"public-read\"")
-    local("aws s3 cp d/registration-data.csv s3://map.berniesanders.com/d/registration-data.csv --metadata-directive REPLACE --content-type \"text/plain\" --region \"us-west-2\" --acl \"public-read\"")
+    local("aws s3 cp js/event-data.gz s3://map.ourrevolution.com/js/event-data.gz --metadata-directive REPLACE --content-encoding \"gzip\" --content-type \"text/javascript\" --region \"us-west-2\"")
+    local("aws s3 cp d/events.json s3://map.ourrevolution.com/d/events.json --metadata-directive REPLACE --content-type \"text/plain\" --region \"us-west-2\"")
+    local("aws s3 cp d/registration-data.csv s3://map.ourrevolution.com/d/registration-data.csv --metadata-directive REPLACE --content-type \"text/plain\" --region \"us-west-2\" --acl \"public-read\"")
 
     invalidate_cloudfront_event_cache()
 
@@ -150,10 +118,10 @@ def zip_javascript():
 
 
 def deploy():
-    local("aws s3 cp . s3://map.berniesanders.com/ --recursive --exclude \"fabfile.py*\" --exclude \".git*\" --exclude \"*.sublime-*\" --exclude \".DS_Store\" --exclude \"js/event-data.gz\" --region \"us-west-2\"")
-    local("aws s3 cp . s3://map.berniesanders.com/ --exclude \"*\" --include \"*.gz\" --exclude \"js/event-data.gz\" --recursive --metadata-directive REPLACE --content-encoding \"gzip\" --region \"us-west-2\"")
-    local("aws s3 cp . s3://map.berniesanders.com/ --exclude \"*\" --include \"js/*.gz\" --exclude \"js/event-data.gz\" --recursive --metadata-directive REPLACE --content-encoding \"gzip\" --content-type \"text/javascript\" --region \"us-west-2\"")
-    local("aws s3 cp . s3://map.berniesanders.com/ --exclude \"*\" --include \"d/us_postal_codes.gz\" --exclude \"js/event-data.gz\" --recursive --metadata-directive REPLACE --content-encoding \"gzip\" --content-type \"text/csv\" --region \"us-west-2\"")
+    local("aws s3 cp . s3://map.ourrevolution.com/ --recursive --exclude \"fabfile.py*\" --exclude \".git*\" --exclude \"*.sublime-*\" --exclude \".DS_Store\" --exclude \"js/event-data.gz\" --region \"us-west-2\"")
+    local("aws s3 cp . s3://map.ourrevolution.com/ --exclude \"*\" --include \"*.gz\" --exclude \"js/event-data.gz\" --recursive --metadata-directive REPLACE --content-encoding \"gzip\" --region \"us-west-2\"")
+    local("aws s3 cp . s3://map.ourrevolution.com/ --exclude \"*\" --include \"js/*.gz\" --exclude \"js/event-data.gz\" --recursive --metadata-directive REPLACE --content-encoding \"gzip\" --content-type \"text/javascript\" --region \"us-west-2\"")
+    local("aws s3 cp . s3://map.ourrevolution.com/ --exclude \"*\" --include \"d/us_postal_codes.gz\" --exclude \"js/event-data.gz\" --recursive --metadata-directive REPLACE --content-encoding \"gzip\" --content-type \"text/csv\" --region \"us-west-2\"")
     invalidate_cloudfront_cache_from_last_commit()
 
 def sign(key, msg):
@@ -176,7 +144,7 @@ def invalidate_cloudfront_cache(payload):
     service = 'cloudfront'
     host = 'cloudfront.amazonaws.com'
     region = 'us-east-1'
-    path = "/2015-04-17/distribution/%s/invalidation" % ("E2SIHVDQUPIR5Z")
+    path = "/2015-04-17/distribution/%s/invalidation" % (os.environ.get('CLOUDFRONT_ID'))
     endpoint = "https://cloudfront.amazonaws.com%s" % path
     content_type = 'text/xml'
 

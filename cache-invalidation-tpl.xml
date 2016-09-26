@@ -6,9 +6,6 @@
          <Path>/js/event-data.gz</Path>
          <Path>/js/event-data.js</Path>
          <Path>/d/events.json</Path>
-         <Path>/d/campaign-offices.csv</Path>
-         <Path>/d/go-the-distance-offices.csv</Path>
-         <Path>/d/go-the-distance.csv</Path>
          <Path>/d/us_postal_code.gz</Path>`
       </Items>
    </Paths>
