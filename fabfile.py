@@ -14,6 +14,16 @@ from fabric.api import *
 from fabric.operations import local
 from string import Template
 
+def update_office_locations():
+
+    print "started downloading Campaign Offices"
+
+    local('cd d; curl "https://docs.google.com/spreadsheets/d/1hJadb6JyDekHf5Vzx-77h7sdJRCOB01XUPvEpKIckDs/pub?gid=0&single=true&output=csv" > campaign-offices.csv')
+
+    local('cd d; curl "https://docs.google.com/spreadsheets/d/1rRexu31MYdff4PLwgPW1A8TMXkFBLmBxU444khLhWaQ/pub?gid=0&single=true&output=csv" > go-the-distance.csv')
+
+    print "Finished Downloading campaign offices"
+
 def update_event_data():
 
     eastern = pytz.timezone('US/Eastern')
