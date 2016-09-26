@@ -5,26 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="description" content="The next step for Bernie Sanders' movement is a new group called Our Revolution, which will fight to transform America and advance the progressive agenda that we believe in. Get started by hosting an event today and let's continue this political revolution.">
 <meta name="keywords" content="Bernie Sanders, FeelTheBern, Events, Bernie, #bernie2016, #feelthebern, #westandtogether">
-<meta property="og:image" content="http://map.berniesanders.com/img/phonebank.png" />
-<meta property="og:url" content="http://map.berniesanders.com/" />
+<meta property="og:image" content="http://map.ourrevolution.com/img/phonebank.png" />
+<meta property="og:url" content="http://map.ourrevolution.com/" />
 <meta property="og:title" content="Let's Organize and Continue this Political Revolution"/>
 <meta property="og:description" content="The next step for Bernie Sanders' movement is a new group called Our Revolution, which will fight to transform America and advance the progressive agenda that we believe in. Get started by hosting an event today and let's continue this political revolution."/>
 <link href='//api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@BernieSanders">
-<meta name="twitter:creator" content="@BernieSanders">
+<meta name="twitter:site" content="@OurRevolution">
+<meta name="twitter:creator" content="@OurRevolution">
 <meta name="twitter:title" content="Let's Organize and Continue this Political Revolution">
 <meta name="twitter:description" content="The next step for Bernie Sanders' movement is a new group called Our Revolution, which will fight to transform America and advance the progressive agenda that we believe in. Get started by hosting an event today and let's continue this political revolution.">
-<meta name="twitter:image" content="http://d2bq2yf31lju3q.cloudfront.net/img/phonebank.png">
+<meta name="twitter:image" content="http://d1y0otadi3knf6.cloudfront.net/img/phonebank.png">
 
 <link rel="stylesheet" type="text/css" href="./css/events-map.css">
 <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Merriweather:400,900,700' />
 <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Lato:100,900,700,400,300' />
 <title>Let's Get to Work! Find Volunteer Work, Grassroots events, and official Rallies for Our Revolution.</title>
 <!--[if lte IE 9]>
-       <meta http-equiv="refresh" content="0; url=https://go.berniesanders.com/page/event/search_simple" />
+       <meta http-equiv="refresh" content="0; url=https://go.ourrevolution.com/page/event/search_simple" />
      <![endif]-->
 <body class='list-view'>
 <section id='header'>
@@ -41,10 +41,10 @@
   <nav>
     <ul id="nav">
       <li>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://map.berniesanders.com/phonebank/" data-text="I'm going to a phonebank party for Our Revolution! Find events near you!" data-related="BernieSanders" data-count="none">Tweet</a>
-        <div class="fb-share-button" data-href="http://map.berniesanders.com/phonebank/" data-layout="button"></div>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://map.ourrevolution.com/phonebank/" data-text="I'm going to a phonebank party for Our Revolution! Find events near you!" data-related="BernieSanders" data-count="none">Tweet</a>
+        <div class="fb-share-button" data-href="http://map.ourrevolution.com/phonebank/" data-layout="button"></div>
       </li>
-      <li><a href="https://go.berniesanders.com/page/event/create" class="contribute contribute-big" target="_blank">Host an Event</a></li>
+      <li><a href="https://go.ourrevolution.com/page/event/create" class="contribute contribute-big" target="_blank">Host an Event</a></li>
     </ul>
   </nav>
   <div style="clear: both"></div>
@@ -103,7 +103,7 @@
           </div>
           <div id='footer-billionaire' style="margin-bottom: 30px;">
             <svg width="200" height="40">
-                <image xlink:href="//d2bq2yf31lju3q.cloudfront.net/img/billionaires.svg" width="200" height="40"
+                <image xlink:href="//d1y0otadi3knf6.cloudfront.net/img/billionaires.svg" width="200" height="40"
                   x="0"
                 />
             </svg>
@@ -118,11 +118,11 @@
   <article id='map'></article>
 </section>
 
-<script src='//d2bq2yf31lju3q.cloudfront.net/js/d3.js' type='text/javascript'></script>
+<script src='//d1y0otadi3knf6.cloudfront.net/js/d3.js' type='text/javascript'></script>
 <script id='zipcodes-datadump' type='text/plain'></script>
-<script src="//d2bq2yf31lju3q.cloudfront.net/js/jquery.js"></script>
-<script src='//d2bq2yf31lju3q.cloudfront.net/js/deparam.min.js'></script>
-<script src='//d2bq2yf31lju3q.cloudfront.net/js/mapbox.js'></script>
+<script src="//d1y0otadi3knf6.cloudfront.net/js/jquery.js"></script>
+<script src='//d1y0otadi3knf6.cloudfront.net/js/deparam.min.js'></script>
+<script src='//d1y0otadi3knf6.cloudfront.net/js/mapbox.js'></script>
 <!-- <script src='/js/leaflet-bouncer.js'></script> -->
 <script src='./js/moment.min.js'></script>
 <script src='./js/MapManager.js'></script>
@@ -130,14 +130,14 @@
 (function($, d3) {
 $("#loading-icon").show();
 $.ajax({
-  url: '//d2bq2yf31lju3q.cloudfront.net/js/event-data.gz',
+  url: '//d1y0otadi3knf6.cloudfront.net/js/event-data.gz',
   dataType: 'script',
   cache: true, // otherwise will get fresh copy every page load
   success: function(data) {
 
     //Load zipcodes
-    //d2bq2yf31lju3q.cloudfront.net
-    d3.csv('//d2bq2yf31lju3q.cloudfront.net/d/us_postal_codes.gz',
+    //d1y0otadi3knf6.cloudfront.net
+    d3.csv('//d1y0otadi3knf6.cloudfront.net/d/us_postal_codes.gz',
      function(zipcodes) {
 
       window.mapManager = MapManager(

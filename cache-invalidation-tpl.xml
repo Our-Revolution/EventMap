@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <InvalidationBatch xmlns="http://cloudfront.amazonaws.com/doc/2015-04-17/">
    <Paths>
-      <Quantity>7</Quantity>
+      <Quantity>4</Quantity>
       <Items>
          <Path>/js/event-data.gz</Path>
          <Path>/js/event-data.js</Path>
