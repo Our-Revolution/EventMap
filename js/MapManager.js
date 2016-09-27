@@ -737,14 +737,15 @@ var VotingInfoManager = (function($) {
       url: 'https://go.ourrevolution.com/page/graph/addrsvp',
       // url: 'https://bernie-ground-control-staging.herokuapp.com/events/add-rsvp',
       crossDomain: true,
-      dataType: 'json',
+      dataType: 'jsonp',
       data: {
         // name: query['name'],
         phone: query['phone'],
         email: query['email'],
         zip: query['zipcode'],
         shift_ids: shifts,
-        event_id_obfuscated: query['id_obfuscated']
+        event_id_obfuscated: query['id_obfuscated'],
+        will_attend: 1
       },
       success: function(data) {
         Cookies.set('map.ourrevolution.zipcode', query['zipcode'], {expires: 7});
