@@ -226,8 +226,8 @@ var MapManager = (function($, d3, leaflet) {
                 filtered.map(function(d) {
                   return $("<li class='lato'/>")
                             .attr('data-attending', (function(prop) {
-                                var email = Cookies.get('map.bernie.email');
-                                var events_attended_raw = Cookies.get('map.bernie.eventsJoined.' + email);
+                                var email = Cookies.get('map.ourrevolution.email');
+                                var events_attended_raw = Cookies.get('map.ourrevolution.eventsJoined.' + email);
                                 var events_attended = events_attended_raw ? JSON.parse(events_attended_raw) : [];
                                 return $.inArray(prop.id_obfuscated, events_attended) > -1;
 
@@ -438,8 +438,8 @@ var MapManager = (function($, d3, leaflet) {
       filtered = sortEvents(filtered, sort, filterTypes);
 
       //Check cookies
-      var email = Cookies.get('map.bernie.email');
-      var events_attended_raw = Cookies.get('map.bernie.eventsJoined.' + email);
+      var email = Cookies.get('map.ourrevolution.email');
+      var events_attended_raw = Cookies.get('map.ourrevolution.eventsJoined.' + email);
       var events_attended = events_attended_raw ? JSON.parse(events_attended_raw) : [];
 
       //Render event
@@ -540,8 +540,8 @@ var MapManager = (function($, d3, leaflet) {
       filtered = sortEvents(filtered, sort, filterTypes);
 
       //Check cookies
-      var email = Cookies.get('map.bernie.email');
-      var events_attended_raw = Cookies.get('map.bernie.eventsJoined.' + email);
+      var email = Cookies.get('map.ourrevolution.email');
+      var events_attended_raw = Cookies.get('map.ourrevolution.eventsJoined.' + email);
       var events_attended = events_attended_raw ? JSON.parse(events_attended_raw) : [];
 
       //Render event
@@ -675,16 +675,16 @@ var VotingInfoManager = (function($) {
   //Show email
   $(document).on("show-event-form", function(events, target) {
     var form = $(target).closest(".event-item").find(".event-rsvp-activity");
-      if (Cookies.get('map.bernie.email')) {
-        form.find("input[name=email]").val(Cookies.get('map.bernie.email'));
+      if (Cookies.get('map.ourrevolution.email')) {
+        form.find("input[name=email]").val(Cookies.get('map.ourrevolution.email'));
       }
 
-      if (Cookies.get('map.bernie.phone')) {
-        form.find("input[name=phone]").val(Cookies.get('map.bernie.phone'));
+      if (Cookies.get('map.ourrevolution.phone')) {
+        form.find("input[name=phone]").val(Cookies.get('map.ourrevolution.phone'));
       }
 
       // var params =  $.deparam(window.location.hash.substring(1) || "");
-      // form.find("input[name=zipcode]").val(params.zipcode ? params.zipcode : Cookies.get('map.bernie.zipcode'));
+      // form.find("input[name=zipcode]").val(params.zipcode ? params.zipcode : Cookies.get('map.ourrevolution.zipcode'));
 
       form.fadeIn(100);
   });
@@ -734,7 +734,7 @@ var VotingInfoManager = (function($) {
     var $this = $(this)
     $.ajax({
       type: 'POST',
-      url: 'https://organize.berniesanders.com/events/add-rsvp',
+      url: 'https://go.ourrevolution.com/page/graph/addrsvp',
       // url: 'https://bernie-ground-control-staging.herokuapp.com/events/add-rsvp',
       crossDomain: true,
       dataType: 'json',
@@ -747,19 +747,19 @@ var VotingInfoManager = (function($) {
         event_id_obfuscated: query['id_obfuscated']
       },
       success: function(data) {
-        Cookies.set('map.bernie.zipcode', query['zipcode'], {expires: 7});
-        Cookies.set('map.bernie.email', query['email'], {expires: 7});
-        Cookies.set('map.bernie.name', query['name'], {expires: 7});
+        Cookies.set('map.ourrevolution.zipcode', query['zipcode'], {expires: 7});
+        Cookies.set('map.ourrevolution.email', query['email'], {expires: 7});
+        Cookies.set('map.ourrevolution.name', query['name'], {expires: 7});
 
         if (query['phone'] != '') {
-          Cookies.set('map.bernie.phone', query['phone'], {expires: 7});
+          Cookies.set('map.ourrevolution.phone', query['phone'], {expires: 7});
         }
 
         //Storing the events joined
-        var events_joined = JSON.parse(Cookies.get('map.bernie.eventsJoined.' + query['email']) || "[]") || [];
+        var events_joined = JSON.parse(Cookies.get('map.ourrevolution.eventsJoined.' + query['email']) || "[]") || [];
 
         events_joined.push(query['id_obfuscated']);
-        Cookies.set('map.bernie.eventsJoined.' + query['email'], events_joined, {expires: 7});
+        Cookies.set('map.ourrevolution.eventsJoined.' + query['email'], events_joined, {expires: 7});
 
 
         $this.closest("li").attr("data-attending", true);

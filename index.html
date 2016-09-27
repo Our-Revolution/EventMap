@@ -251,21 +251,7 @@ $.ajax({
             d.filters = [];
             //Set filter info
             switch(d.event_type_name) {
-              case "Iowa Event":
-              case "New Hampshire Event":
-              case "South Carolina Event":
-              case "Nevada Event":
-              // case "Organizing Meeting": d.filters.push("official-event"); break;
-              case "Rally":
-              case "Town Meeting": d.filters.push("bernie-event"); break;
-              case "Barnstorm": d.filters.push("barnstorm"); break;
-              case "Get Out the Vote" : d.filters.push("gotv"); break;
-              // case "Gather ballot access signatures": d.filters.push("ballot-access"); break;
-              case "Carpool to a primary state": d.filters.push("carpool"); break;
-              case "Canvass": d.filters.push("canvassing"); break;
-              case "Phonebank event" : d.filters.push("phonebank"); break;
-              case "Registering Voters": d.filters.push('register-voters'); break;
-              case "August 24th Our Revolution Organizing Kickoff": d.filters.push("our-revolution"); break;
+              case "Phone Bank" : d.filters.push("phonebank"); break;
               default: d.filters.push('other'); break;
             }
 
@@ -449,13 +435,13 @@ $("#filter-list").append(
 
 <!-- SOCIAL -->
 <script>
-  // (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  // (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  // m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  // })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  //
-  // ga('create', 'UA-58354050-1', 'auto');
-  // ga('send', 'pageview');
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-80816425-1', 'auto');
+  ga('send', 'pageview');
   </script>
   <script>
   // window.fbAsyncInit = function() {

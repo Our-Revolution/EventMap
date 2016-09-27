@@ -44,7 +44,7 @@
         <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://map.ourrevolution.com/phonebank/" data-text="I'm going to a phonebank party for Our Revolution! Find events near you!" data-related="BernieSanders" data-count="none">Tweet</a>
         <div class="fb-share-button" data-href="http://map.ourrevolution.com/phonebank/" data-layout="button"></div>
       </li>
-      <li><a href="https://go.ourrevolution.com/page/event/create" class="contribute contribute-big" target="_blank">Host an Event</a></li>
+      <!-- <li><a href="https://go.ourrevolution.com/page/event/create" class="contribute contribute-big" target="_blank">Host an Event</a></li> -->
     </ul>
   </nav>
   <div style="clear: both"></div>
@@ -118,11 +118,11 @@
   <article id='map'></article>
 </section>
 
-<script src='//d1y0otadi3knf6.cloudfront.net/js/d3.js' type='text/javascript'></script>
+<script src='//d1y0otadi3knf6.cloudfront.net/js/d3.gz' type='text/javascript'></script>
 <script id='zipcodes-datadump' type='text/plain'></script>
-<script src="//d1y0otadi3knf6.cloudfront.net/js/jquery.js"></script>
-<script src='//d1y0otadi3knf6.cloudfront.net/js/deparam.min.js'></script>
-<script src='//d1y0otadi3knf6.cloudfront.net/js/mapbox.js'></script>
+<script src="//d1y0otadi3knf6.cloudfront.net/js/jquery.gz"></script>
+<script src='//d1y0otadi3knf6.cloudfront.net/js/deparam.min.gz'></script>
+<script src='//d1y0otadi3knf6.cloudfront.net/js/mapbox.gz'></script>
 <!-- <script src='/js/leaflet-bouncer.js'></script> -->
 <script src='./js/moment.min.js'></script>
 <script src='./js/MapManager.js'></script>
@@ -141,7 +141,7 @@ $.ajax({
      function(zipcodes) {
 
       window.mapManager = MapManager(
-          window.EVENT_DATA.results.filter(function(d){ return d.event_type_name == 'Phonebank event'; }),
+          window.EVENT_DATA.results.filter(function(d){ return d.event_type_name == 'Phone Bank'; }),
           zipcodes);
 
       $(window).trigger("hashchange");
@@ -220,7 +220,7 @@ $.ajax({
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-58354050-1', 'auto');
+  ga('create', 'UA-80816425-1', 'auto');
   ga('send', 'pageview');
   </script>
   <script>
