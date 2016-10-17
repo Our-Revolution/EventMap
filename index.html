@@ -3,7 +3,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="description" content="The next step for Bernie Sanders' movement is a new group called Our Revolution, which will fight to transform America and advance the progressive agenda that we believe in. Get started by hosting an event today and let's continue this political revolution.">
-<meta property="og:image" content="http://map.ourrevolution.com.com/img/map-v-2.png" />
+<meta property="og:image" content="http://map.ourrevolution.com/img/map-v-2.png" />
 <meta property="og:url" content="http://map.ourrevolution.com/" />
 <meta property="og:title" content="Let's Organize and Continue this Political Revolution"/>
 <meta property="og:description" content="The next step for Bernie Sanders' movement is a new group called Our Revolution, which will fight to transform America and advance the progressive agenda that we believe in. Get started by hosting an event today and let's continue this political revolution."/>
@@ -43,10 +43,10 @@
     <ul id="nav">
       <li>
         <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://map.ourrevolution.com/" data-text="I'm going to a volunteer event for Our Revolution! Find events near you!" data-related="BernieSanders" data-count="none">Tweet</a>&nbsp;&nbsp;<div class="fb-share-button" data-href="http://map.ourrevolution.com/" data-layout="button">
-        <a href="javascript:fbShare('http://map.ourrevolution.com/', 'Fb Share', 'Facebook share popup', 'http://map.ourrevolution.com/img/fb.png', 520, 350)"><img src='./img/icon/fb.png' /><span>Share</span></a></div>
+        <a href="javascript:fbShare('http://map.ourrevolution.com/', 'Fb Share', 'Facebook share popup', 'http://map.ourrevolution.com/img/map-v-2.png', 520, 350)"><img src='./img/icon/fb.png' /><span>Share</span></a></div>
         <!-- div class="fb-share-button" data-href="http://map.ourrevolution.com/phonebank/" data-layout="button"></div -->
       </li>
-      <!-- <li><a href="https://organize.ourrevolution.com/events/create#type=our-revolution-kickoff " class="contribute contribute-big" target="_blank">Host an Event</a></li> -->
+      <li><a href="https://go.ourrevolution.com/page/event/create" class="contribute contribute-big" target="_blank">Host an Event</a></li>
     </ul>
   </nav>
   <div style="clear: both"></div>
@@ -200,18 +200,14 @@ window.eventTypeFilters = [
     name: 'Phonebank',
     id: 'phonebank'
   },
-  // {
-  //   name: 'Get Out The Vote',
-  //   id: 'gotv'
-  // },
-  // {
-  //   name: 'Canvassing',
-  //   id: 'canvassing'
-  // },
-  // {
-  //   name: 'Ballot Access',
-  //   id: 'ballot-access'
-  // },
+  {
+    name: 'Canvassing',
+    id: 'canvassing'
+  },
+  {
+    name: 'Volunteer Activity',
+    id: 'volunteer'
+  },
   // {
   //   name: 'Carpool',
   //   id: 'carpool'
@@ -252,6 +248,8 @@ $.ajax({
             //Set filter info
             switch(d.event_type_name) {
               case "Phone Bank" : d.filters.push("phonebank"); break;
+              case "Canvass for Our Revolution" : d.filters.push("canvassing"); break;
+              case "Volunteer Activity or Meeting" : d.filters.push("volunteer"); break;
               default: d.filters.push('other'); break;
             }
 
