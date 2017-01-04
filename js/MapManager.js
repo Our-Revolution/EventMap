@@ -733,6 +733,7 @@ var VotingInfoManager = (function($) {
     $(this).find(".event-error").hide();
     var $this = $(this)
     $.ajax({
+      cache: true,
       type: 'POST',
       url: 'https://go.ourrevolution.com/page/graph/addrsvp',
       // url: 'https://bernie-ground-control-staging.herokuapp.com/events/add-rsvp',
