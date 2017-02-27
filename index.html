@@ -192,11 +192,11 @@ window.eventTypeFilters = [
   //   id: 'bernie-event',
   //   onItem: "<span class='map-red-circle'></span>",
   // },
-  {
-    name: 'Healthcare Rally',
-    id: 'feb-25th',
-    onItem: "<span class='map-red-circle'></span>",
-  },
+  // {
+  //   name: 'Healthcare Rally',
+  //   id: 'feb-25th',
+  //   onItem: "<span class='map-red-circle'></span>",
+  // },
   {
     name: 'Official Event',
     id: 'official-event',
@@ -259,7 +259,8 @@ $.ajax({
               case "Phone Bank" : d.filters.push("phonebank"); break;
               case "Canvass for Our Revolution" : d.filters.push("canvassing"); break;
               case "Volunteer Activity or Meeting" : d.filters.push("volunteer"); break;
-              case "Feb 25th: Healthcare Actions": d.filters.push("feb-25th"); break;
+              case "Party Meetings" : d.filters.push("party-meetings"); break;
+              // case "Feb 25th: Healthcare Actions": d.filters.push("feb-25th"); break;
               default: d.filters.push('other'); break;
             }
 
