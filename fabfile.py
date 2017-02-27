@@ -1,15 +1,4 @@
-import datetime
-import hashlib
-import hmac
-import json
-import os
-import pytz
-import random
-import string
-import sys
-
-import requests
-
+import datetime, hashlib, hmac, json, os, pytz, random, string, sys, time, requests
 from fabric.api import *
 from fabric.operations import local
 from string import Template
@@ -128,11 +117,12 @@ def zip_javascript():
 
 
 def deploy():
-    local("aws s3 cp . s3://map.ourrevolution.com/ --recursive --exclude \"fabfile.py*\" --exclude \".git*\" --exclude \"*.sublime-*\" --exclude \".DS_Store\" --exclude \"js/event-data.gz\" --exclude \"venv*\" --region \"us-west-2\" --profile \"events-map\"")
-    local("aws s3 cp . s3://map.ourrevolution.com/ --exclude \"*\" --include \"*.gz\" --exclude \"js/event-data.gz\" --recursive --metadata-directive REPLACE --content-encoding \"gzip\" --region \"us-west-2\" --profile \"events-map\"")
-    local("aws s3 cp . s3://map.ourrevolution.com/ --exclude \"*\" --include \"js/*.gz\" --exclude \"js/event-data.gz\" --recursive --metadata-directive REPLACE --content-encoding \"gzip\" --content-type \"text/javascript\" --region \"us-west-2\" --profile \"events-map\"")
-    local("aws s3 cp . s3://map.ourrevolution.com/ --exclude \"*\" --include \"d/us_postal_codes.gz\" --exclude \"js/event-data.gz\" --recursive --metadata-directive REPLACE --content-encoding \"gzip\" --content-type \"text/csv\" --region \"us-west-2\" --profile \"events-map\"")
-    invalidate_cloudfront_cache_from_last_commit()
+    local('aws s3 cp . s3://map.ourrevolution.com/ --recursive --exclude "fabfile.py*" --exclude ".git*" --exclude "*.sublime-*" --exclude ".DS_Store" --exclude "js/event-data.gz" --exclude "venv*" --region "us-west-2" --profile "events-map"')
+    local('aws s3 cp . s3://map.ourrevolution.com/ --recursive --exclude "*" --include "*.gz" --exclude "js/event-data.gz" --metadata-directive REPLACE --content-encoding "gzip" --region "us-west-2" --profile "events-map"')
+    local('aws s3 cp . s3://map.ourrevolution.com/ --recursive --exclude "*" --exclude "venv*" --include "js/*.gz" --exclude "js/event-data.gz" --metadata-directive REPLACE --content-encoding "gzip" --content-type "text/javascript" --region "us-west-2" --profile "events-map"', capture=False)
+    local('aws s3 cp . s3://map.ourrevolution.com/ --recursive --exclude "*" --include "d/us_postal_codes.gz" --exclude "js/event-data.gz" --metadata-directive REPLACE --content-encoding "gzip" --content-type "text/csv" --region "us-west-2" --profile "events-map"', capture=False)
+
+    # invalidate_cloudfront_cache_from_last_commit()
 
 def sign(key, msg):
     return hmac.new(key, msg.encode("utf-8"), hashlib.sha256).digest()
