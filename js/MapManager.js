@@ -188,6 +188,15 @@ var MapManager = (function($, d3, leaflet) {
           iconSize:     [13, 10], // size of the icon
       });
       var defaultCoord = options&&options.defaultCoord ? options.defaultCoord : {center: [37.8, -96.9], zoom: 4};
+      var params = $.deparam(window.location.href.split('?')[1] || '');
+      var paramCenterArray = params.center ? params.center.split(',') : [];
+
+      if (paramCenterArray.length === 2 && !isNaN(paramCenterArray[0]) && !isNaN(paramCenterArray[1])) {
+        window.customMapCoord = {
+          center: [Number(paramCenterArray[0]), Number(paramCenterArray[1])],
+          zoom: Number(params.zoom) || 6
+        }
+      }
 
       var centralMap =  new leaflet
                             .Map("map-container", window.customMapCoord ? window.customMapCoord : defaultCoord)
