@@ -198,6 +198,11 @@ window.eventTypeFilters = [
   //   onItem: "<span class='map-red-circle'></span>",
   // },
   {
+    name: 'State of the Revolution Livestream',
+    id: 'state-of-the-revolution-livestream',
+    onItem: "<span class='map-red-circle'></span>"
+  },
+  {
     name: 'Official Event',
     id: 'official-event',
   },
@@ -261,6 +266,7 @@ $.ajax({
               case "Volunteer Activity or Meeting" : d.filters.push("volunteer"); break;
               case "Party Meetings" : d.filters.push("party-meetings"); break;
               // case "Feb 25th: Healthcare Actions": d.filters.push("feb-25th"); break;
+              case "State of the Revolution Livestream" : d.filters.push("state-of-the-revolution-livestream"); break;
               default: d.filters.push('other'); break;
             }
 
@@ -437,6 +443,7 @@ $("#filter-list").append(
     }
   }
 
+  $('input#state-of-the-revolution-livestream').parent().css('width','100%');
 
 })(jQuery, d3);
 
