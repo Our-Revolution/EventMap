@@ -3,7 +3,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="description" content="The next step for Bernie Sanders' movement is a new group called Our Revolution, which will fight to transform America and advance the progressive agenda that we believe in. Get started by hosting an event today and let's continue this political revolution.">
-<meta property="og:image" content="http://map.ourrevolution.com/img/meta-state-of-the-rev-v2.png" />
+<meta property="og:image" content="http://map.ourrevolution.com/img/map-v-2.png" />
 <meta property="og:url" content="http://map.ourrevolution.com/" />
 <meta property="og:title" content="Let's Organize and Continue this Political Revolution"/>
 <meta property="og:description" content="The next step for Bernie Sanders' movement is a new group called Our Revolution, which will fight to transform America and advance the progressive agenda that we believe in. Get started by hosting an event today and let's continue this political revolution."/>
@@ -15,7 +15,7 @@
 <meta name="twitter:creator" content="@OurRevolution">
 <meta name="twitter:title" content="Let's Organize and Continue this Political Revolution">
 <meta name="twitter:description" content="The next step for Bernie Sanders' movement is a new group called Our Revolution, which will fight to transform America and advance the progressive agenda that we believe in. Get started by hosting an event today and let's continue this political revolution.">
-<meta name="twitter:image" content="http://map.ourrevolution.com/img/meta-state-of-the-rev-v2.png">
+<meta name="twitter:image" content="http://map.ourrevolution.com/img/map-v-2.png">
 
 <link rel="stylesheet" type="text/css" href="./css/events-map.css">
 <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Merriweather:400,900,700' />
@@ -197,14 +197,15 @@ window.eventTypeFilters = [
   //   id: 'feb-25th',
   //   onItem: "<span class='map-red-circle'></span>",
   // },
-  {
-    name: 'State of the Revolution Livestream',
-    id: 'state-of-the-revolution-livestream',
-    onItem: "<span class='map-red-circle'></span>"
-  },
+  // {
+  //   name: 'State of the Revolution Livestream',
+  //   id: 'state-of-the-revolution-livestream',
+  //   onItem: "<span class='map-red-circle'></span>"
+  // },
   {
     name: 'Official Event',
     id: 'official-event',
+    onItem: "<span class='map-red-circle'></span>"
   },
   {
     name: 'Phonebank',
@@ -265,8 +266,6 @@ $.ajax({
               case "Canvass for Our Revolution" : d.filters.push("canvassing"); break;
               case "Volunteer Activity or Meeting" : d.filters.push("volunteer"); break;
               case "Party Meetings" : d.filters.push("party-meetings"); break;
-              // case "Feb 25th: Healthcare Actions": d.filters.push("feb-25th"); break;
-              case "State of the Revolution Livestream" : d.filters.push("state-of-the-revolution-livestream"); break;
               default: d.filters.push('other'); break;
             }
 
@@ -443,7 +442,7 @@ $("#filter-list").append(
     }
   }
 
-  $('input#state-of-the-revolution-livestream').parent().css('width','100%');
+  // $('input#state-of-the-revolution-livestream').parent().css('width','100%');
 
 })(jQuery, d3);
 

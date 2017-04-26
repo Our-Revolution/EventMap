@@ -70,7 +70,7 @@ var MapManager = (function($, d3, leaflet) {
     var zipcodes = zipcodes.reduce(function(zips, item) { zips[item.zip] = item; return zips; }, {});
     var eventsList = eventData.map(function(d) { return new Event(d); });
 
-    leaflet.mapbox.accessToken = "pk.eyJ1IjoiemFja2V4bGV5IiwiYSI6Ijc2OWFhOTE0ZDllODZiMTUyNDYyOGM5MTk1Y2NmZmEyIn0.mfl6MGaSrMmNv5o5D5WBKw";
+    leaflet.mapbox.accessToken = "pk.eyJ1Ijoib3VycmV2b2x1dGlvbiIsImEiOiJjaXp1MmRyNDYwMmc1MnFwYmlpMzZqcHdlIn0.uCYDpnRQvNZB3z0TzmpItw";
     var mapboxTiles = leaflet.tileLayer('http://{s}.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=' + leaflet.mapbox.accessToken, { attribution: '<a href="http://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'});
 
     var centralMap =  new leaflet.Map("map", {
