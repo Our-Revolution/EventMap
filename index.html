@@ -176,32 +176,6 @@
 <script src='./js/MapManager.js'></script>
 <script type='text/javascript'>
 window.eventTypeFilters = [
-  // {
-  //   name: 'Campaign Office',
-  //   id: 'campaign-office',
-  //   onItem: "<img style='width: 14px; height: 14px;' src='//d1y0otadi3knf6.cloudfront.net/img/icon/star.png' />",
-  //   offItem: "<img style='width: 14px; height: 14px;' src='//d1y0otadi3knf6.cloudfront.net/img/icon/star-gray.png' />"
-  // },
-  // { name: 'GOTV Center',
-  //   id: 'gotv-center',
-  //   onItem: "<img style='width: 14px; height: 14px;' src='//d1y0otadi3knf6.cloudfront.net/img/icon/gotv-star.png' />",
-  //   offItem: "<img style='width: 14px; height: 14px;' src='//d1y0otadi3knf6.cloudfront.net/img/icon/star-gray.png' />"
-  // },
-  // {
-  //   name: 'Bernie Event',
-  //   id: 'bernie-event',
-  //   onItem: "<span class='map-red-circle'></span>",
-  // },
-  // {
-  //   name: 'Healthcare Rally',
-  //   id: 'feb-25th',
-  //   onItem: "<span class='map-red-circle'></span>",
-  // },
-  // {
-  //   name: 'State of the Revolution Livestream',
-  //   id: 'state-of-the-revolution-livestream',
-  //   onItem: "<span class='map-red-circle'></span>"
-  // },
   {
     name: 'Meet Senator Turner',
     id:'meet-senator-turner',
@@ -214,7 +188,7 @@ window.eventTypeFilters = [
     onItem: "<span class='map-red-circle'></span>"
   },
   {
-    name: 'Phonebank',
+    name: 'Phone Bank',
     id: 'phonebank'
   },
   {
@@ -224,6 +198,10 @@ window.eventTypeFilters = [
   {
     name: 'Party Meetings',
     id: 'party-meetings'
+  },
+  {
+    name: 'Rally',
+    id: 'rally'
   },
   {
     name: 'Other',
@@ -253,10 +231,10 @@ $.ajax({
             //Set filter info
             switch(d.event_type_name) {
               case "Phone Bank" : d.filters.push("phonebank"); break;
-              case "Canvass for Our Revolution" : d.filters.push("canvassing"); break;
               case "Volunteer Activity or Meeting" : d.filters.push("volunteer"); break;
               case "Party Meetings" : d.filters.push("party-meetings"); break;
               case "Meet Senator Turner" : d.filters.push("meet-senator-turner"); break;
+              case "Rally" : d.filters.push("rally"); break;
               default: d.filters.push('other'); break;
             }
 
