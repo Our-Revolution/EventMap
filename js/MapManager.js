@@ -281,19 +281,7 @@ var MapManager = (function($, d3, leaflet) {
 
       uniqueLocs.forEach(function(item) {
          // setTimeout(function() {
-          if (item.className == "campaign-office") {
-            L.marker(item.latLng, {icon: CAMPAIGN_OFFICE_ICON, className: item.className})
-              .on('click', function(e) { _popupEvents(e); })
-              .addTo(offices);
-          } else if (item.className == "gotv-center") {
-            L.marker(item.latLng, {icon: GOTV_CENTER_ICON, className: item.className})
-              .on('click', function(e) { _popupEvents(e); })
-              .addTo(gotvCenter);
-          }else if (item.className.match(/bernie\-event/ig)) {
-            L.circleMarker(item.latLng, { radius: 12, className: item.className, color: 'white', fillColor: '#F55B5B', opacity: 0.8, fillOpacity: 0.7, weight: 2 })
-              .on('click', function(e) { _popupEvents(e); })
-              .addTo(overlays);
-          }else if(item.className.match(/official\-event/ig)){
+          if (item.className.match(/official\-event/ig)){
             L.circleMarker(item.latLng, { radius: 7, className: item.className, color: 'white', fillColor: '#F55B5B', opacity: 0.8, fillOpacity: 0.7, weight: 2 })
               .on('click', function(e) { _popupEvents(e); })
               .addTo(overlays);
