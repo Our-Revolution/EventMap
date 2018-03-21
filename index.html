@@ -203,6 +203,12 @@ window.eventTypeFilters = [
   //   onItem: "<span class='map-red-circle'></span>"
   // },
   {
+    name: 'Meet Senator Turner',
+    id:'meet-senator-turner',
+    onItem: "<img style='width: 14px; height: 14px;' src='//d1y0otadi3knf6.cloudfront.net/img/icon/star.png' />",
+    offItem: "<img style='width: 14px; height: 14px;' src='//d1y0otadi3knf6.cloudfront.net/img/icon/star-gray.png' />"
+  },
+  {
     name: 'Official Event',
     id: 'official-event',
     onItem: "<span class='map-red-circle'></span>"
@@ -212,10 +218,6 @@ window.eventTypeFilters = [
     id: 'phonebank'
   },
   {
-    name: 'Canvassing',
-    id: 'canvassing'
-  },
-  {
     name: 'Volunteer Activity',
     id: 'volunteer'
   },
@@ -223,18 +225,6 @@ window.eventTypeFilters = [
     name: 'Party Meetings',
     id: 'party-meetings'
   },
-  // {
-  //   name: 'Carpool',
-  //   id: 'carpool'
-  // },
-  // {
-  //   name: 'Register Voters',
-  //   id: 'register-voters'
-  // },
-  // {
-  //   name: 'Barnstorm',
-  //   id: 'barnstorm'
-  // },
   {
     name: 'Other',
     id: 'other'
@@ -266,6 +256,7 @@ $.ajax({
               case "Canvass for Our Revolution" : d.filters.push("canvassing"); break;
               case "Volunteer Activity or Meeting" : d.filters.push("volunteer"); break;
               case "Party Meetings" : d.filters.push("party-meetings"); break;
+              case "Meet Senator Turner" : d.filters.push("meet-senator-turner"); break;
               default: d.filters.push('other'); break;
             }
 

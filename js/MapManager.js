@@ -297,7 +297,12 @@ var MapManager = (function($, d3, leaflet) {
             L.circleMarker(item.latLng, { radius: 7, className: item.className, color: 'white', fillColor: '#F55B5B', opacity: 0.8, fillOpacity: 0.7, weight: 2 })
               .on('click', function(e) { _popupEvents(e); })
               .addTo(overlays);
-          } else {
+          }else if(item.className == "meet-senator-turner"){
+            L.marker(item.latLng, {icon: CAMPAIGN_OFFICE_ICON, className: item.className})
+              .on('click', function(e) { _popupEvents(e); })
+              .addTo(overlays);
+          }
+          else {
             L.circleMarker(item.latLng, { radius: 5, className: item.className, color: 'white', fillColor: '#1462A2', opacity: 0.8, fillOpacity: 0.7, weight: 2 })
               .on('click', function(e) { _popupEvents(e); })
               .addTo(overlays);
