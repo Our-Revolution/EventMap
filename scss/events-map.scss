@@ -330,8 +330,8 @@ section#header {
     }
   }
   div#spiel {
-    padding-top: 10px;
-    margin-left: 10px;
+    padding-top: 15px;
+    margin-left: 15px;
     font-weight: 300;
     display: inline-block;
     color: $darkdarkblue;
@@ -525,6 +525,7 @@ article#events {
               .map-red-circle {
                 background-color: $red;
               }
+
               .circle-button {
                 &.default-on {
                   background-color: $bernieblue;
