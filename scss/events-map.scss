@@ -512,7 +512,7 @@ article#events {
                 margin-right: 4px;
               }
 
-              .map-red-circle, .circle-button {
+              .map-red-circle, .map-purple-circle, .circle-button {
                 vertical-align: top;
                 display: inline-block;
                 width: 11px;
@@ -524,6 +524,10 @@ article#events {
 
               .map-red-circle {
                 background-color: $red;
+              }
+              
+              .map-purple-circle {
+                background-color: $purple;
               }
 
               .circle-button {
@@ -581,7 +585,7 @@ article#events {
         ul {
           li {
             display: inline-block;
-            width: calc(50% - 20px);
+            // width: calc(50% - 20px);
             padding: 5px 5px;
           }
         }
