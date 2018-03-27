@@ -281,8 +281,8 @@ var MapManager = (function($, d3, leaflet) {
 
       uniqueLocs.forEach(function(item) {
          // setTimeout(function() {
-          if (item.className == "meet-senator-turner"){
-            L.marker(item.latLng, {icon: CAMPAIGN_OFFICE_ICON, className: item.className})
+          if (item.className.match(/meet-senator-turner/)){
+            L.circleMarker(item.latLng, { radius: 7, className: item.className, color: 'white', fillColor: '#8527FF', opacity: 0.8, fillOpacity: 0.7, weight: 2 })
               .on('click', function(e) { _popupEvents(e); })
               .addTo(overlays);
           } else if(item.className.match(/official\-event/ig)){

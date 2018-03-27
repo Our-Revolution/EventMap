@@ -524,7 +524,7 @@ html, body {
             vertical-align: middle; }
           html article#events.show-type-filter #filter-popup-area #filter-list-area div#f-container ul li label .filter-on, html article#events.show-type-filter #filter-popup-area #filter-list-area div#f-container ul li label .filter-off, body article#events.show-type-filter #filter-popup-area #filter-list-area div#f-container ul li label .filter-on, body article#events.show-type-filter #filter-popup-area #filter-list-area div#f-container ul li label .filter-off {
             margin-right: 4px; }
-          html article#events.show-type-filter #filter-popup-area #filter-list-area div#f-container ul li label .map-red-circle, html article#events.show-type-filter #filter-popup-area #filter-list-area div#f-container ul li label .circle-button, body article#events.show-type-filter #filter-popup-area #filter-list-area div#f-container ul li label .map-red-circle, body article#events.show-type-filter #filter-popup-area #filter-list-area div#f-container ul li label .circle-button {
+          html article#events.show-type-filter #filter-popup-area #filter-list-area div#f-container ul li label .map-red-circle, html article#events.show-type-filter #filter-popup-area #filter-list-area div#f-container ul li label .map-purple-circle, html article#events.show-type-filter #filter-popup-area #filter-list-area div#f-container ul li label .circle-button, body article#events.show-type-filter #filter-popup-area #filter-list-area div#f-container ul li label .map-red-circle, body article#events.show-type-filter #filter-popup-area #filter-list-area div#f-container ul li label .map-purple-circle, body article#events.show-type-filter #filter-popup-area #filter-list-area div#f-container ul li label .circle-button {
             vertical-align: top;
             display: inline-block;
             width: 11px;
@@ -534,6 +534,8 @@ html, body {
             box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2); }
           html article#events.show-type-filter #filter-popup-area #filter-list-area div#f-container ul li label .map-red-circle, body article#events.show-type-filter #filter-popup-area #filter-list-area div#f-container ul li label .map-red-circle {
             background-color: #F55B5B; }
+          html article#events.show-type-filter #filter-popup-area #filter-list-area div#f-container ul li label .map-purple-circle, body article#events.show-type-filter #filter-popup-area #filter-list-area div#f-container ul li label .map-purple-circle {
+            background-color: #8527FF; }
           html article#events.show-type-filter #filter-popup-area #filter-list-area div#f-container ul li label .circle-button.default-on, body article#events.show-type-filter #filter-popup-area #filter-list-area div#f-container ul li label .circle-button.default-on {
             background-color: #147FD7; }
           html article#events.show-type-filter #filter-popup-area #filter-list-area div#f-container ul li label .circle-button.default-off, body article#events.show-type-filter #filter-popup-area #filter-list-area div#f-container ul li label .circle-button.default-off {
@@ -568,7 +570,6 @@ html, body {
         margin-top: 10px; }
         html article#events #filter-popup-area #filter-list-area ul li, body article#events #filter-popup-area #filter-list-area ul li {
           display: inline-block;
-          width: calc(50% - 20px);
           padding: 5px 5px; } }
     @media screen and (max-width: 600px) {
       html article#events #filter-popup-area ul li, body article#events #filter-popup-area ul li {
