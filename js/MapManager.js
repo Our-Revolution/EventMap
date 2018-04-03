@@ -276,33 +276,70 @@ var MapManager = (function($, d3, leaflet) {
                  className: split[2] };
       });
 
-
-
-
-      uniqueLocs.forEach(function(item) {
-         // setTimeout(function() {
-          if (item.className.match(/meet-senator-turner/)){
-            L.circleMarker(item.latLng, { radius: 7, className: item.className, color: 'white', fillColor: '#8527FF', opacity: 0.8, fillOpacity: 0.7, weight: 2 })
-              .on('click', function(e) { _popupEvents(e); })
-              .addTo(overlays);
-          } else if(item.className.match(/official\-event/ig)){
-            L.circleMarker(item.latLng, { radius: 7, className: item.className, color: 'white', fillColor: '#F55B5B', opacity: 0.8, fillOpacity: 0.7, weight: 2 })
-              .on('click', function(e) { _popupEvents(e); })
-              .addTo(overlays);
-          }
-          else {
-            L.circleMarker(item.latLng, { radius: 5, className: item.className, color: 'white', fillColor: '#1462A2', opacity: 0.8, fillOpacity: 0.7, weight: 2 })
-              .on('click', function(e) { _popupEvents(e); })
-              .addTo(overlays);
-          }
-        // }, 10);
+      // Sort events by z-index and add to map.
+      // Stacking is based on order added to map.
+      // https://groups.google.com/forum/#!msg/leaflet-js/Qi8GPl60S8o/k_-xnDGp2acJ
+      eventsSorted = uniqueLocs.sort(function(a, b) {
+        return getZIndex(a.className) - getZIndex(b.className)
       });
-
-
+      eventsSorted.forEach(function(item) {
+        addItemToMap(item.latLng, item.className);
+      });
 
       // $(".leaflet-overlay-pane").find(".bernie-event").parent().prependTo('.leaflet-zoom-animated');
 
     }; // End of initialize
+
+    /**
+     * Add item to map and choose icon based on class name
+     *
+     * @param {object} latLng
+     *   latitude and longitude of map item
+     * @param {string} className
+     *   Class name for map item
+     */
+    var addItemToMap = function(latLng, className) {
+
+      // SNT events
+      if (className.match(/meet-senator-turner/)){
+        L.circleMarker(latLng, {
+          radius: 7,
+          className: className,
+          color: 'white',
+          fillColor: '#8527FF',
+          opacity: 0.8,
+          fillOpacity: 0.7,
+          weight: 2
+        }).on('click', function(e) { _popupEvents(e); })
+          .addTo(overlays);
+
+      } else if(className.match(/official\-event/ig)){
+        // Official events
+        L.circleMarker(latLng, {
+          radius: 7,
+          className: className,
+          color: 'white',
+          fillColor: '#F55B5B',
+          opacity: 0.8,
+          fillOpacity: 0.7,
+          weight: 2
+        }).on('click', function(e) { _popupEvents(e); })
+          .addTo(overlays);
+
+      } else {
+        // Other events
+        L.circleMarker(latLng, {
+          radius: 5,
+          className: className,
+          color: 'white',
+          fillColor: '#1462A2',
+          opacity: 0.8,
+          fillOpacity: 0.7,
+          weight: 2
+        }).on('click', function(e) { _popupEvents(e); })
+          .addTo(overlays);
+      }
+    };
 
     var toMile = function(meter) { return meter * 0.00062137; };
 
@@ -334,6 +371,24 @@ var MapManager = (function($, d3, leaflet) {
     var filterEvents = function (zipcode, distance, filterTypes) {
       return filterEventsByCoords([parseFloat(zipcode.lat), parseFloat(zipcode.lon)], distance, filterTypes)
     };
+
+    /**
+     * Get z-index stack order of map item based on class name.
+     *
+     * Assumes that higher numbers show on top layers.
+     *
+     * @param {string} className
+     *   Class name for map item
+     */
+    function getZIndex(className) {
+      if (className.match(/meet-senator-turner/)) {
+        return 10
+      } else if(className.match(/official\-event/ig)) {
+        return 9
+      } else {
+        return 1
+      }
+    }
 
     var sortEvents = function(filteredEvents, sortType) {
       switch (sortType) {
