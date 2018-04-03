@@ -280,9 +280,11 @@ var MapManager = (function($, d3, leaflet) {
       // Stacking is based on order added to map.
       // https://groups.google.com/forum/#!msg/leaflet-js/Qi8GPl60S8o/k_-xnDGp2acJ
       eventsSorted = uniqueLocs.sort(function(a, b) {
-        return getZIndex(a.className)-getZIndex(b.className)
+        return getZIndex(a.className) - getZIndex(b.className)
       });
-      eventsSorted.forEach(addItemToMap);
+      eventsSorted.forEach(function(item) {
+        addItemToMap(item.latLng, item.className);
+      });
 
       // $(".leaflet-overlay-pane").find(".bernie-event").parent().prependTo('.leaflet-zoom-animated');
 
@@ -291,16 +293,18 @@ var MapManager = (function($, d3, leaflet) {
     /**
      * Add item to map and choose icon based on class name
      *
-     * @param {object} item
-     *   Item to add to map
+     * @param {object} latLng
+     *   latitude and longitude of map item
+     * @param {string} className
+     *   Class name for map item
      */
-    var addItemToMap = function(item) {
+    var addItemToMap = function(latLng, className) {
 
       // SNT events
-      if (item.className.match(/meet-senator-turner/)){
-        L.circleMarker(item.latLng, {
+      if (className.match(/meet-senator-turner/)){
+        L.circleMarker(latLng, {
           radius: 7,
-          className: item.className,
+          className: className,
           color: 'white',
           fillColor: '#8527FF',
           opacity: 0.8,
@@ -309,11 +313,11 @@ var MapManager = (function($, d3, leaflet) {
         }).on('click', function(e) { _popupEvents(e); })
           .addTo(overlays);
 
-      } else if(item.className.match(/official\-event/ig)){
+      } else if(className.match(/official\-event/ig)){
         // Official events
-        L.circleMarker(item.latLng, {
+        L.circleMarker(latLng, {
           radius: 7,
-          className: item.className,
+          className: className,
           color: 'white',
           fillColor: '#F55B5B',
           opacity: 0.8,
@@ -324,9 +328,9 @@ var MapManager = (function($, d3, leaflet) {
 
       } else {
         // Other events
-        L.circleMarker(item.latLng, {
+        L.circleMarker(latLng, {
           radius: 5,
-          className: item.className,
+          className: className,
           color: 'white',
           fillColor: '#1462A2',
           opacity: 0.8,
@@ -369,17 +373,17 @@ var MapManager = (function($, d3, leaflet) {
     };
 
     /**
-     * Get sort order of map item based on class name
+     * Get z-index stack order of map item based on class name.
      *
-     * Assumes that lower numbers (1, 2, ...) are meant to show on top layer
+     * Assumes that higher numbers show on top layers.
      *
      * @param {string} className
      *   Class name for map item
      */
     function getZIndex(className) {
-      if (className.match(/meet-senator-turner/)){
+      if (className.match(/meet-senator-turner/)) {
         return 10
-      } else if(className.match(/official\-event/ig)){
+      } else if(className.match(/official\-event/ig)) {
         return 9
       } else {
         return 1
